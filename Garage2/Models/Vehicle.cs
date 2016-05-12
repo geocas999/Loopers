@@ -10,13 +10,15 @@ namespace Garage2.Models
         public int Id { get; set; }
         public VehicleType VehicleTypes { get; set; }
         public string RegNr { get; set; }
-        public string ParkingTime { get; set; }
+        public DateTime ParkingTime { get; set; }
         public string Color { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
     }
     public enum VehicleType
     {
-
+        Car,
+        MC,
+        Bus
     }
 }
