@@ -137,6 +137,14 @@
     <Compile Include="Migrations\201605130742453_init.Designer.cs">
       <DependentUpon>201605130742453_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605130954017_new-seed-added-nullable-fields.cs" />
+    <Compile Include="Migrations\201605130954017_new-seed-added-nullable-fields.Designer.cs">
+      <DependentUpon>201605130954017_new-seed-added-nullable-fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605131123514_change-spelling-corrections.cs" />
+    <Compile Include="Migrations\201605131123514_change-spelling-corrections.Designer.cs">
+      <DependentUpon>201605131123514_change-spelling-corrections.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -191,6 +199,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605130742453_init.resx">
       <DependentUpon>201605130742453_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605130954017_new-seed-added-nullable-fields.resx">
+      <DependentUpon>201605130954017_new-seed-added-nullable-fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605131123514_change-spelling-corrections.resx">
+      <DependentUpon>201605131123514_change-spelling-corrections.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

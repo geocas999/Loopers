@@ -13,7 +13,7 @@ namespace Garage2.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         VehicleTypes = c.Int(nullable: false),
-                        RegNr = c.String(),
+                        RegNr = c.String(nullable: false),
                         StartTime = c.DateTime(nullable: false),
                         EndTime = c.DateTime(),
                         Color = c.String(),
