@@ -10,7 +10,7 @@ namespace Garage2.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Garage2.DataAccessLayer.GarageContext context)
