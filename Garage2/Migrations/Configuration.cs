@@ -4,6 +4,7 @@ namespace Garage2.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Garage2.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Garage2.DataAccessLayer.GarageContext>
     {
@@ -26,6 +27,11 @@ namespace Garage2.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            context.Vechicles.AddOrUpdate(
+              v => v.Brand,
+              new Vehicle { VehicleTypes = VehicleType.Car, Brand = "Volvo", Model = "V70", Color = "Silver", RegNr = "ABC123", StartTime = DateTime.Now }
+              );
         }
     }
 }
