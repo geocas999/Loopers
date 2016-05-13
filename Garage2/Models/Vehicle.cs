@@ -9,12 +9,8 @@ namespace Garage2.Models
     public class Vehicle
     {
         public int Id { get; set; }
-
-        [Display(Name = "Fordonstyp")]
-        public VehicleType VehicleTypes { get; set; }
-
-        //[Required]
-        [Display(Name = "Registreringsnummer")]
+        public VehicleType VehicleType { get; set; }
+        [Required]
         public string RegNr { get; set; }
 
         [Display(Name = "Parkering påbörjad")]
