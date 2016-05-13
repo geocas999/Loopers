@@ -15,14 +15,8 @@ namespace Garage2.Models
 
         [Display(Name = "Registreringsnummer")]
         public string RegNr { get; set; }
-
-        [Display(Name = "Parkeringstid påbörjad")]
-        public DateTime ParkingTimeStart { get; set; }
-
-        [Display(Name = "Parkeringstid avlsutad")]
-        public DateTime ParkingTimeEnd { get; set; }
-
-        [Display(Name = "Färg")]
+        public DateTime StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
         public string Color { get; set; }
 
         [Display(Name = "Märke")]
