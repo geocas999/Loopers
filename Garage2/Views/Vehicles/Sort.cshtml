@@ -13,13 +13,17 @@
 
     <tr>
         <th>
-            @Html.ActionLink("RegNr", "Index", new { Sorting_Order = ViewBag.SortingName })
+            @Html.ActionLink("VehicleType", "Sort", new { Sorting_Order = "VehicleType" })
         </th>
         <th>
-          
+
+        <th>
+            @Html.ActionLink("RegNr", "Sort", new { Sorting_Order = "RegNr" })
         </th>
         <th>
-            @Html.ActionLink("StartTid", "Index", new { Sorting_Order = ViewBag.SortingName })
+        </th>
+        <th>
+            @Html.ActionLink("StartTime", "Sort", new { Sorting_Order = "StartTime" })
         </th>
         <th>
           
