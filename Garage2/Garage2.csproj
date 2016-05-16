@@ -150,6 +150,10 @@
     <Compile Include="Migrations\201605160846529_New-field-to-db-TotalTime.Designer.cs">
       <DependentUpon>201605160846529_New-field-to-db-TotalTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605160929163_Changed-field.cs" />
+    <Compile Include="Migrations\201605160929163_Changed-field.Designer.cs">
+      <DependentUpon>201605160929163_Changed-field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -219,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605160846529_New-field-to-db-TotalTime.resx">
       <DependentUpon>201605160846529_New-field-to-db-TotalTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605160929163_Changed-field.resx">
+      <DependentUpon>201605160929163_Changed-field.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

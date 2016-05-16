@@ -149,7 +149,7 @@ namespace Garage2.Controllers
         {
             Vehicle vehicle = db.Vehicles.Find(id);
             vehicle.EndTime = DateTime.Now;
-
+            vehicle.TotalTime = (vehicle.EndTime - vehicle.StartTime);
             //db.Vehicles.Remove(vehicle);
             db.SaveChanges();
             //return View("Receipt", vehicle);  
