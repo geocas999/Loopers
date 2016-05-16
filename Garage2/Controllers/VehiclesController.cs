@@ -114,7 +114,7 @@ namespace Garage2.Controllers
             Vehicle vehicle = db.Vehicles.Find(id);
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Receipt");
         }
 
         protected override void Dispose(bool disposing)
