@@ -24,7 +24,7 @@ namespace Garage2.Models
         public DateTime? EndTime { get; set; }
 
         [Display(Name = "Total parkeringstid")]
-        public DateTime? TotalTime { get; set; }
+        public TimeSpan? TotalTime { get; set; }
 
         [Display(Name = "Märke")]
         public string Brand { get; set; }
@@ -35,6 +35,7 @@ namespace Garage2.Models
         [Display(Name = "Färg")]
         public string Color { get; set; }
     }
+
     public enum VehicleType
     {
         //[Display(Name = "Bil")]

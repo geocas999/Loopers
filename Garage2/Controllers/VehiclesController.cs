@@ -76,7 +76,7 @@ namespace Garage2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,VehicleTypes,RegNr,StartTime,Color,Brand,Model")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "Id,VehicleType,RegNr,StartTime,Color,Brand,Model")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +142,7 @@ namespace Garage2.Controllers
         {
             Vehicle vehicle = db.Vehicles.Find(id);
             vehicle.EndTime = DateTime.Now;
-
+            vehicle.TotalTime = (vehicle.EndTime - vehicle.StartTime);
             //db.Vehicles.Remove(vehicle);
             db.SaveChanges();
             //return View("Receipt", vehicle);  

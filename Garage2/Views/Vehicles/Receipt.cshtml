@@ -71,10 +71,31 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TotalTime)
+            @{
+                var totalTime = Model.TotalTime;
+                var days = totalTime.Value.Days;
+                var hours = totalTime.Value.Hours;
+                var minutes = totalTime.Value.Minutes;
+            }            
+
+            @(days > 9 ? "" + days : "0" + days):@(hours > 9 ? "" + hours : "0" + hours):@(minutes > 9 ? "" + minutes : "0" + minutes)
+        </dd>
+
+        <dt>
+            Pris
+        </dt>
+
+        <dd>
+            @{                
+                var parkingFee = (totalTime.Value.Days * 1440 + totalTime.Value.Hours * 60 + totalTime.Value.Minutes * 1);
+            }
+            @parkingFee
         </dd>
 
     </dl>
+
+
+
 </div>
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
