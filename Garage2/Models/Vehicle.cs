@@ -13,7 +13,7 @@ namespace Garage2.Models
         [Display(Name = "Fordonstyp")]
         public VehicleType VehicleType { get; set; }
 
-        [Required]       
+        [Required]
         [Display(Name = "Registreringsnummer")]
         public string RegNr { get; set; }
 

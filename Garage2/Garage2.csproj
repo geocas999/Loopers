@@ -146,6 +146,10 @@
     <Compile Include="Migrations\201605131123514_change-spelling-corrections.Designer.cs">
       <DependentUpon>201605131123514_change-spelling-corrections.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605160846529_New-field-to-db-TotalTime.cs" />
+    <Compile Include="Migrations\201605160846529_New-field-to-db-TotalTime.Designer.cs">
+      <DependentUpon>201605160846529_New-field-to-db-TotalTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605131123514_change-spelling-corrections.resx">
       <DependentUpon>201605131123514_change-spelling-corrections.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605160846529_New-field-to-db-TotalTime.resx">
+      <DependentUpon>201605160846529_New-field-to-db-TotalTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

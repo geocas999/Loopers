@@ -21,6 +21,35 @@ namespace Garage2.Controllers
             return View(db.Vehicles.ToList());
         }
 
+
+
+        //SortOrder by Category
+        public ActionResult Sort(string Sorting_Order)
+        {
+            ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
+            ViewBag.SortingDate = Sorting_Order == "VehicleType" ? "RegNr" : "StartTime";
+
+            var vehicles = from v in db.Vehicles select v;
+
+            switch (Sorting_Order)
+            {
+                case "VehicleType":
+                    vehicles = vehicles.OrderByDescending(v => v.VehicleType);
+                    break;
+                case "RegNr":
+                    vehicles = vehicles.OrderByDescending(v => v.RegNr);
+                    break;
+                //case "StartTime":
+                //    vehicles = vehicles.OrderByDescending(v => v.StartTime);
+                //    break;
+                default:
+                    vehicles = vehicles.OrderBy(v => v.RegNr);
+                    break;
+            }
+            return View(db.Vehicles.ToList());
+        }
+
+
         // GET: Vehicles/Details/5
         public ActionResult Details(int? id)
         {
