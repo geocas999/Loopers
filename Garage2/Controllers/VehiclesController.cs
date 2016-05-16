@@ -16,12 +16,28 @@ namespace Garage2.Controllers
         private GarageContext db = new GarageContext();
 
         // GET: Vehicles
-        public ActionResult Index()
+        public ActionResult Index(string Sorting = null)
         {
-            return View(db.Vehicles.ToList());
+            var vehicles = from v in db.Vehicles select v;
+            switch (Sorting)
+            {
+                case "VehicleType":
+                    vehicles = vehicles.OrderBy(v => v.VehicleType.ToString());
+                    break;
+                case "RegNr":
+                    vehicles = vehicles.OrderBy(v => v.RegNr);
+                    break;
+                case "StartTime":
+                    vehicles = vehicles.OrderBy(v => v.StartTime);
+                    break;
+                default:
+                    vehicles = vehicles.OrderBy(v => v.RegNr);
+                    break;
+                    
+            }
+            //return View(db.Vehicles.ToList());
+            return View(vehicles);
         }
-
-
 
         //SortOrder by Category
         public ActionResult Sort(string Sorting_Order)

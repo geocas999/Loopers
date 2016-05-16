@@ -4,8 +4,8 @@
     ViewBag.Title = "Översikt";
 }
 
-<h2>Index</h2>
-<h3>Översikt Fordon i Garaget</h3>
+@*<h2>Index</h2>*@
+<h3>Garage Register</h3>
 
 <p>
     @Html.ActionLink("Parkera ett fordon", "Create")
@@ -13,13 +13,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("VehicleType", "Sort", new { Sorting_Order = "VehicleType" })
+            @Html.ActionLink("Fordonstyp", "Index", new { Sorting = "VehicleType" })
         </th>
         <th>
-            @Html.ActionLink("RegNr", "Sort", new { Sorting_Order = "RegNr" })
+            @Html.ActionLink("Registreringsnummer", "Index", new { Sorting = "RegNr" })
         </th>
         <th>
-            @Html.ActionLink("StartTime", "Sort", new { Sorting_Order = "StartTime" })
+            @Html.ActionLink("Parkering påbörjad", "Index", new { Sorting = "StartTime" })
         </th>
         <th>
             @*<th>
