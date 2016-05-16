@@ -15,7 +15,12 @@ namespace Garage2.Models
 
         [Display(Name = "Parkering påbörjad")]
         public DateTime StartTime { get; set; }
+
+        [Display(Name = "Parkering avslutad")]
         public DateTime? EndTime { get; set; }
+
+        [Display(Name = "Total Parkeringstid")]
+        public DateTime? TotalTime { get; set; }
 
         [Display(Name = "Märke")]
         public string Brand { get; set; }
