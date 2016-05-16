@@ -26,21 +26,28 @@ namespace Garage2.Controllers
         //SortOrder by Category
         public ActionResult Sort(string Sorting_Order)
         {
-            //ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
-            //ViewBag.SortingDate = Sorting_Order == "VehicleType" ? "RegNr" : "StartTime";
-
+            
             var vehicles = from v in db.Vehicles select v;
 
             switch (Sorting_Order)
             {
                 case "VehicleType":
-                    vehicles = vehicles.OrderByDescending(v => v.VehicleType);
+                    vehicles = vehicles.OrderBy(v => v.VehicleType.ToString());
                     break;
                 case "RegNr":
-                    vehicles = vehicles.OrderByDescending(v => v.RegNr);
+                    vehicles = vehicles.OrderBy(v => v.RegNr);
                     break;
                 case "StartTime":
-                    vehicles = vehicles.OrderByDescending(v => v.StartTime);
+                    vehicles = vehicles.OrderBy(v => v.StartTime);
+                    break;
+                case "Brand":
+                    vehicles = vehicles.OrderBy(v => v.Brand);
+                    break;
+                case "Model":
+                    vehicles = vehicles.OrderBy(v => v.Model);
+                    break;
+                case "Color":
+                    vehicles = vehicles.OrderBy(v => v.Color);
                     break;
                 default:
                     vehicles = vehicles.OrderBy(v => v.RegNr);
@@ -76,7 +83,7 @@ namespace Garage2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,VehicleTypes,RegNr,StartTime,Color,Brand,Model")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "Id,VehicleType,RegNr,StartTime,Color,Brand,Model")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
