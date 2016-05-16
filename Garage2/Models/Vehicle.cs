@@ -9,13 +9,22 @@ namespace Garage2.Models
     public class Vehicle
     {
         public int Id { get; set; }
+
+        [Display(Name = "Fordonstyp")]
         public VehicleType VehicleType { get; set; }
-        [Required]
+
+        [Required]       
+        [Display(Name = "Registreringsnummer")]
         public string RegNr { get; set; }
 
         [Display(Name = "Parkering påbörjad")]
         public DateTime StartTime { get; set; }
+
+        [Display(Name = "Parkering avslutad")]
         public DateTime? EndTime { get; set; }
+
+        [Display(Name = "Total parkeringstid")]
+        public DateTime? TotalTime { get; set; }
 
         [Display(Name = "Märke")]
         public string Brand { get; set; }
@@ -28,11 +37,11 @@ namespace Garage2.Models
     }
     public enum VehicleType
     {
-        [Display(Name = "Bil")]
-        Car,
-        [Display(Name = "Motorcykel")]
-        MC,
-        [Display(Name = "Buss")]
-        Bus
+        //[Display(Name = "Bil")]
+        Bil,
+        //[Display(Name = "Motorcykel")]
+        Motorcykel,
+        //[Display(Name = "Buss")]
+        Buss
     }
 }
