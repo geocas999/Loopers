@@ -19,7 +19,7 @@ namespace Garage2.Controllers
         
 
         // GET: Vehicles
-        public ActionResult Index(string Sorting = null, string searchTerm = null)
+        public ActionResult Index(string Sorting = null, string searchTerm = null, string show = null)
         {
             var vehicles = from v in db.Vehicles where v.Parked==true select v;
 
@@ -29,6 +29,11 @@ namespace Garage2.Controllers
                 return View(vehicles);
             }
 
+            if (show == "all")
+            {
+                vehicles = from v in db.Vehicles select v;
+                return View(vehicles);
+            }
 
             switch (Sorting)
             {
@@ -43,8 +48,7 @@ namespace Garage2.Controllers
                     break;
                 default:
                     vehicles = vehicles.OrderBy(v => v.RegNr);
-                    break;
-                    
+                    break;                    
             }
             //return View(db.Vehicles.ToList());
             return View(vehicles);
