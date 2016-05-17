@@ -20,8 +20,7 @@ namespace Garage2.Migrations
                         Brand = c.String(),
                         Model = c.String(),
                     })
-                .PrimaryKey(t => t.Id);
-            
+                .PrimaryKey(t => t.Id);            
         }
         
         public override void Down()

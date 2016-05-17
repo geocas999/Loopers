@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Garage2.Models.Vehicle>
+
+<br />
+<div class="col-md-12">
+
+    @* Andra alternativ med @Ajax.ActionLink *@
+    <form method="get"
+          action="@Url.Action("Search")"
+          data-otf-ajax="true"
+          data-otf-target="#searchList">
+
+        <input type="search"
+               name="searchTerm"
+               placeholder="Ange registrering nummer"
+               data-otf-autocomplete="@Url.Action("Autocomplete")" />
+
+        <input id="inputRegister" type="submit" value="Garage register" />
+    </form>
+</div>
+<br />
+
+@* Render the the view  *@
+@Html.Partial("_SearchVehicle", Model)

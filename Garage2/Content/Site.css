@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#inputRegister{
+    margin-left: 50px;
+    height: 25px;
+}
+

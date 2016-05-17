@@ -21,6 +21,33 @@ namespace Garage2.Controllers
             return View(db.Vehicles.ToList());
         }
 
+        public ActionResult Autocomplete(string term)
+        {
+            var model = db.Vehicles.Where(v => v.RegNr.StartsWith(term)).Take(10).Select(v => new { label = v.RegNr });
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult Search(string searchTerm = null)
+        {
+            var model = from v in db.Vehicles select v;
+
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                return View(model);
+            }
+
+            model = from v in db.Vehicles where v.RegNr.StartsWith(searchTerm) select v;
+            if (Request.IsAjaxRequest())
+            {
+
+                return PartialView("_SearchVehicle", model);
+
+            }
+            return View(model);
+        }
+
 
 
         //SortOrder by Category
