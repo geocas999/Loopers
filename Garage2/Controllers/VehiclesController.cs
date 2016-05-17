@@ -16,9 +16,17 @@ namespace Garage2.Controllers
         private GarageContext db = new GarageContext();
 
         // GET: Vehicles
-        public ActionResult Index(string Sorting = null)
+        public ActionResult Index(string Sorting = null, string searchTerm = null)
         {
-            var vehicles = from v in db.Vehicles select v;
+            var vehicles = from v in db.Vehicles where v.Parked==true select v;
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                vehicles = from v in db.Vehicles where v.RegNr.StartsWith(searchTerm) select v;
+                return View(vehicles);
+            }
+
+
             switch (Sorting)
             {
                 case "VehicleType":

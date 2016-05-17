@@ -7,71 +7,102 @@
 @*<h2>Index</h2>*@
 <h3>Garage Register</h3>
 
-<p>
-    @Html.ActionLink("Parkera ett fordon", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Fordonstyp", "Index", new { Sorting = "VehicleType" })
-        </th>
-        <th>
-            @Html.ActionLink("Registreringsnummer", "Index", new { Sorting = "RegNr" })
-        </th>
-        <th>
-            @Html.ActionLink("Parkering påbörjad", "Index", new { Sorting = "StartTime" })
-        </th>
-        <th>
+<br/>
+<div class="Row">
+  
+        <div class="col-md-4">
+            <p>
+                @Html.ActionLink("Parkera ett fordon", "Create")
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <form method="get"
+                  action="@Url.Action("Index")"
+                  data-otf-ajax="true"
+                  data-otf-target="#searchList">
+
+                <input id="inputRegister1"
+                       type="search"
+                       name="searchTerm"
+                       placeholder="Ange registrering nummer"
+                       data-otf-autocomplete="@Url.Action("Autocomplete")" />
+
+                @*<input id="inputRegister2" type="submit" value="Garage register" />*@
+            </form>
+        </div>
+</div>
+<br/><br/>
+
+<div id="searchList">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Fordonstyp", "Index", new { Sorting = "VehicleType" })
+            </th>
+            <th>
+                @Html.ActionLink("Registreringsnummer", "Index", new { Sorting = "RegNr" })
+            </th>
+            <th>
+                @Html.ActionLink("Parkering påbörjad", "Index", new { Sorting = "StartTime" })
+            </th>
+            <th>
             <th>
                 @Html.DisplayNameFor(model => model.Parked)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.RegNr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.RegNr)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>*@
             @*<th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>*@
-<th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    if (item.EndTime == null) { 
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegNr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Parked)
-           @* </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>*@
-            <td>
-               
-                @Html.ActionLink("Detaljvy", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Kör ut fordon", "Delete", new { id=item.Id }) |
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id })
-            </td>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>*@
+            <th></th>
         </tr>
-    }
-}
 
-</table>
+        @foreach (var item in Model)
+        {
+            if (item.EndTime == null)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegNr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parked)
+                        @* </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Brand)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Model)
+                            </td>*@
+                    <td>
+
+                        @Html.ActionLink("Detaljvy", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Kör ut fordon", "Delete", new { id = item.Id }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Tillbaka till översikt", "Index")
+</div>
