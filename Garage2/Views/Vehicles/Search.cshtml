@@ -11,13 +11,14 @@
 
         <input type="search"
                name="searchTerm"
-               placeholder="Ange registrering nummer"
+               placeholder="Sök registreringsnummer"
                data-otf-autocomplete="@Url.Action("Autocomplete")" />
 
-        <input id="inputRegister" type="submit" value="Garage register" />
+        <input id="inputRegister" type="submit" value="Översikt" />
     </form>
 </div>
 <br />
 
 @* Render the the view  *@
 @Html.Partial("_SearchVehicle", Model)
+
