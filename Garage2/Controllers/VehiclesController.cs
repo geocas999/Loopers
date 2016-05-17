@@ -42,6 +42,35 @@ namespace Garage2.Controllers
             return View(vehicles);
         }
 
+        public ActionResult Autocomplete(string term)
+        {
+            var model = db.Vehicles.Where(v => v.RegNr.StartsWith(term)).Take(10).Select(v => new { label = v.RegNr });
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult Search(string searchTerm = null)
+        {
+            var model = from v in db.Vehicles select v;
+
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                return View(model);
+            }
+
+            model = from v in db.Vehicles where v.RegNr.StartsWith(searchTerm) select v;
+            if (Request.IsAjaxRequest())
+            {
+
+                return PartialView("_SearchVehicle", model);
+
+            }
+            return View(model);
+        }
+
+
+
         //SortOrder by Category
         public ActionResult Sort(string Sorting_Order)
         {
@@ -102,7 +131,7 @@ namespace Garage2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,VehicleType,RegNr,StartTime,Color,Brand,Model")] Vehicle vehicle)
+        public ActionResult Create([Bind(Include = "Id,RegNr,VehicleType,StartTime,EndTime,Brand,Model,Color,TotalTime,Parked")] Vehicle vehicle)
         {
 
             if (ModelState.IsValid)
@@ -110,6 +139,7 @@ namespace Garage2.Controllers
                 //if(ValidateRegNr(RegNr) = true)
 
                 vehicle.StartTime = DateTime.Now;
+                vehicle.Parked = true;
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -145,7 +175,7 @@ namespace Garage2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VehicleTypes,RegNr,ParkingTime,Color,Brand,Model")] Vehicle vehicle)
+        public ActionResult Edit([Bind(Include = "Id, RegNr, VehicleType, StartTime, EndTime, Brand, Model, Color, TotalTime, Parked")] Vehicle vehicle)
         {
             if (ModelState.IsValid)
             {
@@ -178,6 +208,7 @@ namespace Garage2.Controllers
         {
             Vehicle vehicle = db.Vehicles.Find(id);
             vehicle.EndTime = DateTime.Now;
+            vehicle.Parked = false;
             vehicle.TotalTime = (vehicle.EndTime - vehicle.StartTime);
             //db.Vehicles.Remove(vehicle);
             db.SaveChanges();

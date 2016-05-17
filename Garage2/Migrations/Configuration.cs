@@ -44,6 +44,19 @@ namespace Garage2.Migrations
             //  new Vehicle { VehicleType = VehicleType.Bus, Brand = "Volvo", Model = "8900", Color = "Red", RegNr = "KTR472", StartTime = DateTime.Now },
             //  new Vehicle { VehicleType = VehicleType.Bus, Brand = "Volvo", Model = "Sport", Color = "Blue", RegNr = "LEW321", StartTime = DateTime.Now }
             //  );
+
+            for (int i = 0; i < 10; i++)
+            {
+                context.Vehicles.AddOrUpdate(
+                      v => v.RegNr,
+                      new Models.Vehicle { RegNr = "CTA13" + i, VehicleType = Models.VehicleType.Bil, StartTime = DateTime.Now, EndTime = null, Brand = "Alfa Romeo", Model = "X1", Color = "Grå", TotalTime = null, Parked = true },
+                      new Models.Vehicle { RegNr = "BPA40" + i, VehicleType = Models.VehicleType.Buss, StartTime = DateTime.Now, EndTime = null, Brand = "Scania", Model = "SX07", Color = "Blå", TotalTime = null, Parked = true },
+                      new Models.Vehicle { RegNr = "SVE32" + i, VehicleType = Models.VehicleType.Motorcykel, StartTime = DateTime.Now, EndTime = null, Brand = "Toyota", Model = "TY12", Color = "svart", TotalTime = null, Parked = true },
+                      new Models.Vehicle { RegNr = "NSI92" + i, VehicleType = Models.VehicleType.Bil, StartTime = DateTime.Now, EndTime = null, Brand = "Audi", Model = "X2", Color = "Grå", TotalTime = null, Parked = true },
+                      new Models.Vehicle { RegNr = "HGK68" + i, VehicleType = Models.VehicleType.Buss, StartTime = DateTime.Now, EndTime = null, Brand = "Volkswagen", Model = "SX08", Color = "Red", TotalTime = null, Parked = true },
+                      new Models.Vehicle { RegNr = "SPE01" + i, VehicleType = Models.VehicleType.Motorcykel, StartTime = DateTime.Now, EndTime = null, Brand = "BMV", Model = "TX99", Color = "Grön", TotalTime = null, Parked = true }
+                    );
+            }
         }
     }
 }
