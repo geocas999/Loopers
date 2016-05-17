@@ -246,6 +246,9 @@ table {
   a[href^="#"]:after {
     content: "";
   }
+  dd {
+    margin-bottom: 20px;
+  }
   pre,
   blockquote {
     border: 1px solid #999;
@@ -260,6 +263,9 @@ table {
   }
   img {
     max-width: 100% !important;
+  }
+    #hidePrintable {
+      display : none;
   }
   @page  {
     margin: 2cm .5cm;
