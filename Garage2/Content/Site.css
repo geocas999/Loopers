@@ -21,10 +21,12 @@ input,
 select,
 textarea {
     max-width: 280px;
+     border-radius: 5px; 
 }
 
-#inputRegister{
+#inputRegister1, inputRegister2{
     margin-left: 50px;
-    height: 25px;
+    height: 23px;
+   
 }
 

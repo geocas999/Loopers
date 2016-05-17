@@ -9,16 +9,27 @@ using System.Web.Mvc;
 using Garage2.DataAccessLayer;
 using Garage2.Models;
 
+
 namespace Garage2.Controllers
 {
     public class VehiclesController : Controller
     {
         private GarageContext db = new GarageContext();
 
+        
+
         // GET: Vehicles
-        public ActionResult Index(string Sorting = null)
+        public ActionResult Index(string Sorting = null, string searchTerm = null)
         {
-            var vehicles = from v in db.Vehicles select v;
+            var vehicles = from v in db.Vehicles where v.Parked==true select v;
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                vehicles = from v in db.Vehicles where v.RegNr.StartsWith(searchTerm) select v;
+                return View(vehicles);
+            }
+
+
             switch (Sorting)
             {
                 case "VehicleType":
@@ -130,18 +141,28 @@ namespace Garage2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,RegNr,VehicleType,StartTime,EndTime,Brand,Model,Color,TotalTime,Parked")] Vehicle vehicle)
         {
+
             if (ModelState.IsValid)
             {
+                //if(ValidateRegNr(RegNr) = true)
+
                 vehicle.StartTime = DateTime.Now;
                 vehicle.Parked = true;
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
             }
 
             return View(vehicle);
         }
 
+      
+
+
+       
+
+       
         // GET: Vehicles/Edit/5
         public ActionResult Edit(int? id)
         {
