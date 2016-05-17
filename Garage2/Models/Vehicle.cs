@@ -11,8 +11,8 @@ namespace Garage2.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(6)]
-        // [RegularExpression(@"^[A-Z]{3}[0-9]{3})", ErrorMessage = "Ange 3 versala bokstäver och 3 siffror")]
+        [StringLength(6, MinimumLength = 6)]
+        [RegularExpression(@"^[A-Z]{3}[0-9]{3}", ErrorMessage = "Ange 3 versala bokstäver och 3 siffror")]
         [Display(Name = "Registreringsnummer")]
         public string RegNr { get; set; }
 

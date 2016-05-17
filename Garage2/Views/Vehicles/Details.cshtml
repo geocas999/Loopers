@@ -32,12 +32,19 @@
 
         <dd>
             @Html.DisplayFor(model => model.StartTime)
+        </dd>        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Brand)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Brand)
         </dd>
@@ -56,6 +63,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Parked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Parked)
         </dd>
 
     </dl>
