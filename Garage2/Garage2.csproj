@@ -57,6 +57,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -110,6 +118,10 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="Webdiyer.MvcPager, Version=3.0.2015.802, Culture=neutral, PublicKeyToken=f6872c5a09aed72c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Webdiyer.MvcPager.3.0.1.1\lib\Webdiyer.MvcPager.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -161,6 +173,48 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\jquery\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\jquery\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\css\jquery\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\css\jquery\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\jquery\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\css\jquery\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\css\jquery\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\jquery\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\css\jquery\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\jquery\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\jquery\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\css\jquery\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\css\jquery\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\jquery\jquery-ui.css" />
+    <Content Include="Content\css\jquery\jquery.ui.accordion.css" />
+    <Content Include="Content\css\jquery\jquery.ui.all.css" />
+    <Content Include="Content\css\jquery\jquery.ui.autocomplete.css" />
+    <Content Include="Content\css\jquery\jquery.ui.base.css" />
+    <Content Include="Content\css\jquery\jquery.ui.button.css" />
+    <Content Include="Content\css\jquery\jquery.ui.core.css" />
+    <Content Include="Content\css\jquery\jquery.ui.datepicker.css" />
+    <Content Include="Content\css\jquery\jquery.ui.dialog.css" />
+    <Content Include="Content\css\jquery\jquery.ui.progressbar.css" />
+    <Content Include="Content\css\jquery\jquery.ui.resizable.css" />
+    <Content Include="Content\css\jquery\jquery.ui.selectable.css" />
+    <Content Include="Content\css\jquery\jquery.ui.slider.css" />
+    <Content Include="Content\css\jquery\jquery.ui.tabs.css" />
+    <Content Include="Content\css\jquery\jquery.ui.theme.css" />
+    <Content Include="Content\css\jquery\minified\jquery-ui.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\css\jquery\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -171,11 +225,16 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\otf.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -200,6 +259,8 @@
     <Content Include="Views\Vehicles\Index.cshtml" />
     <Content Include="Views\Vehicles\Receipt.cshtml" />
     <Content Include="Views\Vehicles\Sort.cshtml" />
+    <Content Include="Views\Vehicles\Search.cshtml" />
+    <Content Include="Views\Vehicles\_SearchVehicle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

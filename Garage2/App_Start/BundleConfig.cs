@@ -8,8 +8,13 @@ namespace Garage2
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/otf").Include(
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/jquery-ui-{version}.js",
+                "~/Scripts/jquery.unobtrusive-ajax.js",
+                "~/Scripts/jquery.validate.js",
+                "~/Scripts/otf.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -26,6 +31,23 @@ namespace Garage2
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/jquery").Include(
+                    "~/Content/css/jquery/jquery.ui.autocomplete.css",
+                    "~/Content/css/jquery/jquery.ui.base.css",
+                    "~/Content/css/jquery/jquery-ui.css",
+                    "~/Content/css/jquery/jquery.ui.accordion.css",
+                    "~/Content/css/jquery/jquery.ui.all.css",
+                    "~/Content/css/jquery/jquery.ui.button.css",
+                    "~/Content/css/jquery/jquery.ui.core.css",
+                    "~/Content/css/jquery/jquery.ui.datepicker.css",
+                    "~/Content/css/jquery/jquery.ui.dialog.css",
+                    "~/Content/css/jquery/jquery.ui.progressbar.css",
+                    "~/Content/css/jquery/jquery.ui.resizable.css",
+                    "~/Content/css/jquery/jquery.ui.selectable.css",
+                    "~/Content/css/jquery/jquery.ui.slider.css",
+                    "~/Content/css/jquery/jquery.ui.tabs.css",
+                    "~/Content/css/jquery/jquery.ui.theme.css"));
         }
     }
 }
