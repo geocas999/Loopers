@@ -46,7 +46,7 @@ namespace Garage2.Migrations
             //  new Vehicle { VehicleType = VehicleType.Bus, Brand = "Volvo", Model = "Sport", Color = "Blue", RegNr = "LEW321", StartTime = DateTime.Now }
             //  );
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 4; i++)
             {
                 context.Vehicles.AddOrUpdate(
                       v => v.RegNr,

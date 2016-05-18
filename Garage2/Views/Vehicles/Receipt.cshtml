@@ -78,7 +78,8 @@
                 var minutes = totalTime.Value.Minutes;
             }            
 
-            @(days > 9 ? "" + days : "0" + days):@(hours > 9 ? "" + hours : "0" + hours):@(minutes > 9 ? "" + minutes : "0" + minutes)
+            @(days > 9 ? "" + days : "0" + days) dagar, @(hours > 9 ? "" + hours : "0" + hours) timmar, @(minutes > 9 ? "" + minutes : "0" + minutes) minuter
+            
         </dd>
 
         <dt>

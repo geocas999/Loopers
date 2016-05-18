@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Garage2.Models.Vehicle>
+﻿@*@model IEnumerable<Garage2.Models.Vehicle>*@
+
+@model IPagedList<Vehicle>
 
 @{
     ViewBag.Title = "Översikt";
@@ -10,12 +12,13 @@
 <div class="Row" style="margin-bottom:54px">  
     <div class="col-md-2" style="padding:8px 0 8px 8px; width:114px; height:36px; font-weight:bold">        
         @Html.ActionLink("Parkera fordon", "Create")      
-    </div>    
+    </div>
+        
     <div class="col-md-6" style="padding-left:0; margin-left:0">
         <form method="get"
                 action="@Url.Action("Index")"
-                data-otf-ajax="true"
-                data-otf-target="#searchList">
+                data-tomas-ajax="true"
+                data-tomas-target="#searchList">
 
             <input id="inputRegister1"
                     class="form-control"
@@ -23,12 +26,12 @@
                     type="search"
                     name="searchTerm"
                     placeholder="Sök registreringsnummer"
-                    data-otf-autocomplete="@Url.Action("Autocomplete")" />
+                    data-tomas-autocomplete="@Url.Action("Autocomplete")" />
 
             @*<input id="inputRegister2" type="submit" value="Garage register" />*@
         </form>
     </div>
-    <div class="col-md-4">
+    @*<div class="col-md-4">
         @{
             if (Request.QueryString["show"] == "all")
             {
@@ -39,51 +42,60 @@
                 @Html.ActionLink("Visa historik", "Index", new { show = "all" })
             }
         }
-    </div>   
+    </div>*@   
 </div>
 
 <div id="searchList">
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Fordonstyp", "Index", new { Sorting = "VehicleType" })
-        </th>
-        <th>
-            @Html.ActionLink("Registreringsnummer", "Index", new { Sorting = "RegNr" })
-        </th>
-        <th>
-            @Html.ActionLink("Parkering påbörjad", "Index", new { Sorting = "StartTime" })
-        </th>
-        <th style="color:#428bca">
-            Status
-        </th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Fordonstyp", "Index", new { Sorting = "VehicleType" })
+            </th>
+            <th>
+                @Html.ActionLink("Registreringsnummer", "Index", new { Sorting = "RegNr" })
+            </th>
+            <th>
+                @Html.ActionLink("Parkering påbörjad", "Index", new { Sorting = "StartTime" })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Parked)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) { 
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VehicleType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegNr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Parked)
-        </td>
-        <td>
-            @Html.ActionLink("Detaljer", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Ändra", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Kör ut fordon", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model) { 
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Parked)
+                </td>
+                <td>
+                    @Html.ActionLink("Detaljer", "Details", new { id=item.Id }) |
+                    @*@Html.ActionLink("Ändra", "Edit", new { id=item.Id }) |*@
+                    @Html.ActionLink("Kör ut fordon", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+
+    <div data-tomas-target="#searchList">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+        PagedListRenderOptions.PageNumbersOnly)
+    </div>
+    <br />
+    <div>
+        @Html.ActionLink("TIllbaka till översikt", "Index")
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Tillbaka till översikt", "Index")
-</div>
+
+
+   

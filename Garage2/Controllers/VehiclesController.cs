@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Garage2.DataAccessLayer;
 using Garage2.Models;
+using PagedList;
 
 
 namespace Garage2.Controllers
@@ -19,38 +20,41 @@ namespace Garage2.Controllers
         
 
         // GET: Vehicles
-        public ActionResult Index(string Sorting = null, string searchTerm = null, string show = null)
+        public ActionResult Index(string Sorting = null, string searchTerm = null, int page = 1)
         {
-            var vehicles = from v in db.Vehicles where v.Parked==true select v;
+            var vehicles = (from v in db.Vehicles orderby v.RegNr where v.Parked == true select v).ToPagedList(page, 10);
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                vehicles = from v in db.Vehicles where v.RegNr.StartsWith(searchTerm) select v;
+                vehicles = (from v in db.Vehicles orderby v.RegNr where v.RegNr.StartsWith(searchTerm) select v).ToPagedList(page, 1);
                 return View(vehicles);
             }
 
-            if (show == "all")
-            {
-                vehicles = from v in db.Vehicles select v;
-                return View(vehicles);
-            }
+            //if (show == "all")
+            //{
+            //    vehicles = (from v in db.Vehicles orderby v.RegNr select v).ToPagedList(page, 10);
+            //    return View(vehicles);
+            //}
 
             switch (Sorting)
             {
                 case "VehicleType":
-                    vehicles = vehicles.OrderBy(v => v.VehicleType.ToString());
+                    //vehicles = (vehicles.OrderBy(v => v.VehicleType.ToString())).ToPagedList(page, 6);
+                    vehicles = (from v in db.Vehicles orderby v.VehicleType select v).ToPagedList(page, 10);
                     break;
                 case "RegNr":
-                    vehicles = vehicles.OrderBy(v => v.RegNr);
+                    //vehicles = vehicles.OrderBy(v => v.RegNr).ToPagedList(page, 6);
+                    vehicles = (from v in db.Vehicles orderby v.RegNr select v).ToPagedList(page, 10);
                     break;
                 case "StartTime":
-                    vehicles = vehicles.OrderBy(v => v.StartTime);
+                    //vehicles = vehicles.OrderBy(v => v.StartTime).ToPagedList(page, 6);
+                    vehicles = (from v in db.Vehicles orderby v.StartTime select v).ToPagedList(page, 10);
                     break;
                 default:
-                    vehicles = vehicles.OrderBy(v => v.RegNr);
+                    //vehicles = vehicles.OrderBy(v => v.RegNr).ToPagedList(page, 6);
+                    //vehicles = (from v in db.Vehicles orderby v.RegNr select v).ToPagedList(page, 10);
                     break;                    
             }
-            //return View(db.Vehicles.ToList());
             return View(vehicles);
         }
 
@@ -160,13 +164,7 @@ namespace Garage2.Controllers
 
             return View(vehicle);
         }
-
-      
-
-
-       
-
-       
+               
         // GET: Vehicles/Edit/5
         public ActionResult Edit(int? id)
         {

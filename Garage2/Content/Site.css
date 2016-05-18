@@ -24,9 +24,10 @@ textarea {
      border-radius: 5px; 
 }
 
-#inputRegister1, inputRegister2{
-    margin-left: 50px;
-    height: 23px;
+#inputRegister1{
+    /*margin-left: 350px;*/
+    float:right;
+    height: 20px;
    
 }
 

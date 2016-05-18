@@ -1,31 +1,33 @@
-﻿@model IEnumerable<Garage2.Models.Vehicle>
+﻿@*@model IEnumerable<Garage2.Models.Vehicle>*@
+
+@model IPagedList<Vehicle>
 
 <div id="searchList">
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RegNr)
+                @Html.DisplayNameFor(model => model.First().RegNr)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VehicleType)
+                @Html.DisplayNameFor(model => model.First().VehicleType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartTime)
+                @Html.DisplayNameFor(model => model.First().StartTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndTime)
+                @Html.DisplayNameFor(model => model.First().EndTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Brand)
+                @Html.DisplayNameFor(model => model.First().Brand)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Model)
+                @Html.DisplayNameFor(model => model.First().Model)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Color)
+                @Html.DisplayNameFor(model => model.First().Color)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Parked)
+                @Html.DisplayNameFor(model => model.First().Parked)
             </th>
             <th></th>
         </tr>
@@ -65,5 +67,9 @@
             </tr>
         }
     </table>
+</div>
+
+<div class="pagedList col-md-12">
+    @Html.ActionLink("Tillbaka till översikt", "Index")
 </div>
 

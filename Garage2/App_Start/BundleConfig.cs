@@ -13,7 +13,7 @@ namespace Garage2
                 "~/Scripts/jquery-ui-{version}.js",
                 "~/Scripts/jquery.unobtrusive-ajax.js",
                 "~/Scripts/jquery.validate.js",
-                "~/Scripts/otf.js"
+                "~/Scripts/tomas.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -30,7 +30,8 @@ namespace Garage2
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/PagedList.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/jquery").Include(
                     "~/Content/css/jquery/jquery.ui.autocomplete.css",
