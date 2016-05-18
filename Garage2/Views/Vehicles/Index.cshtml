@@ -10,11 +10,11 @@
 
 <br/>
 <div class="Row" style="margin-bottom:54px">  
-    <div class="col-md-2" style="padding:8px 0 8px 8px; width:114px; height:36px; font-weight:bold">        
+    <div class="col-md-8" style="padding:8px 0 8px 8px; width:114px; height:36px; font-weight:bold">        
         @Html.ActionLink("Parkera fordon", "Create")      
     </div>
         
-    <div class="col-md-6" style="padding-left:0; margin-left:0">
+    <div class="col-md-4" style="padding-left:0; margin-left:0">
         <form method="get"
                 action="@Url.Action("Index")"
                 data-tomas-ajax="true"
@@ -31,18 +31,7 @@
             @*<input id="inputRegister2" type="submit" value="Garage register" />*@
         </form>
     </div>
-    @*<div class="col-md-4">
-        @{
-            if (Request.QueryString["show"] == "all")
-            {
-                @Html.ActionLink("Visa endast parkerade", "Index", new { show = "parked" })
-            }
-            else
-            {
-                @Html.ActionLink("Visa historik", "Index", new { show = "all" })
-            }
-        }
-    </div>*@   
+   
 </div>
 
 <div id="searchList">
@@ -92,9 +81,20 @@
         PagedListRenderOptions.PageNumbersOnly)
     </div>
     <br />
-    <div>
-        @Html.ActionLink("TIllbaka till översikt", "Index")
-    </div>
+    
+        <div class="col-md-4">
+            @{
+                if (Request.QueryString["searchTerm"] != null)
+                {
+                     @Html.ActionLink("TIllbaka till översikt", "Index")
+                }
+                @*else
+                {
+                    @Html.ActionLink("Visa historik", "Index", new { show = "all" })
+                }*@
+            }
+        </div>
+    
 </div>
 
 
