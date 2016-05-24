@@ -143,6 +143,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\Vehicles1Controller.cs" />
+    <Compile Include="Controllers\Vehicles2Controller.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="DataAccessLayer\GarageContext.cs" />
@@ -283,6 +284,11 @@
     <Content Include="Views\VehicleTypes\Details.cshtml" />
     <Content Include="Views\VehicleTypes\Edit.cshtml" />
     <Content Include="Views\VehicleTypes\Index.cshtml" />
+    <Content Include="Views\Vehicles2\Create.cshtml" />
+    <Content Include="Views\Vehicles2\Delete.cshtml" />
+    <Content Include="Views\Vehicles2\Details.cshtml" />
+    <Content Include="Views\Vehicles2\Edit.cshtml" />
+    <Content Include="Views\Vehicles2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
