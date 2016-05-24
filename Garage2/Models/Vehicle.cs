@@ -17,9 +17,12 @@ namespace Garage2.Models
         [Display(Name = "Registreringsnummer")]
         public string RegNr { get; set; }
 
-        [Required]
-        [Display(Name = "Fordonstyp")]
-        public VehicleType VehicleType { get; set; }
+        public int MemberId { get; set; }
+        public int VehicleTypeId { get; set; }
+
+        //[Required]
+        //[Display(Name = "Fordonstyp")]
+        //public VehicleType VehicleType { get; set; }
 
         [Required]
         [Display(Name = "Parkering påbörjad")]
@@ -43,15 +46,18 @@ namespace Garage2.Models
 
         [Display(Name = "Parkerad")]
         public bool Parked { get; set; }
+
+        public virtual ICollection<Member> Members { get; set; }
+        public virtual ICollection<VehicleType> VehicleTypes { get; set; }
     }
 
-    public enum VehicleType
-    {
-        //[Display(Name = "Bil")]
-        Bil,
-        //[Display(Name = "Motorcykel")]
-        Motorcykel,
-        //[Display(Name = "Buss")]
-        Buss
-    }
+    //public enum VehicleType
+    //{
+    //    //[Display(Name = "Bil")]
+    //    Bil,
+    //    //[Display(Name = "Motorcykel")]
+    //    Motorcykel,
+    //    //[Display(Name = "Buss")]
+    //    Buss
+    //}
 }
