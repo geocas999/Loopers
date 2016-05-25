@@ -1,0 +1,104 @@
+﻿@model Garage2.Models.Vehicle
+
+@{
+    ViewBag.Title = "Kvitto";
+}
+
+<h2>Kvitto</h2>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.RegNr)</h4>
+    <h4>@Html.DisplayFor(model => model.Member.Name )</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegNr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegNr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalTime)
+        </dt>
+
+        <dd>
+            @{
+                var totalTime = Model.TotalTime;
+                var days = totalTime.Value.Days;
+                var hours = totalTime.Value.Hours;
+                var minutes = totalTime.Value.Minutes;
+            }            
+
+            @(days > 9 ? "" + days : "0" + days) dagar, @(hours > 9 ? "" + hours : "0" + hours) timmar, @(minutes > 9 ? "" + minutes : "0" + minutes) minuter
+            
+        </dd>
+
+        <dt>
+            Pris
+        </dt>
+
+        <dd>
+            @{                
+                var parkingFee = (totalTime.Value.Days * 1440 + totalTime.Value.Hours * 60 + totalTime.Value.Minutes * 1);
+            }
+            @parkingFee
+        </dd>
+
+    </dl>
+
+</div>
+
+<div id="hidePrintable">
+    <p><input type="button" onclick="javascript: print();" value="Skriv ut" class="btn btn-default" /></p>        
+    <p>@Html.ActionLink("Tillbaka till översikt", "Index")</p>
+</div>

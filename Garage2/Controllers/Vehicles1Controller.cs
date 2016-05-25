@@ -146,11 +146,32 @@ namespace Garage2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //Vehicle vehicle = db.Vehicles.Find(id);
+            //db.Vehicles.Remove(vehicle);
+            //db.SaveChanges();
+            //return RedirectToAction("Index");
+
             Vehicle vehicle = db.Vehicles.Find(id);
-            db.Vehicles.Remove(vehicle);
+            vehicle.EndTime = DateTime.Now;
+            vehicle.Parked = false;
+            vehicle.TotalTime = (vehicle.EndTime - vehicle.StartTime);
+            //db.Vehicles.Remove(vehicle);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return View("Receipt", vehicle);  
+            //return RedirectToAction("Receipt", new { id = id });
         }
+
+        //// GET: Vehicles1/Receipt/5
+        //public ActionResult Receipt(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Vehicle vehicle = db.Vehicles.Find(id);
+
+        //    return View(vehicle);
+        //}
 
         protected override void Dispose(bool disposing)
         {
