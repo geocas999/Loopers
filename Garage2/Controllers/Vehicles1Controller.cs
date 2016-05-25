@@ -150,9 +150,21 @@ namespace Garage2.Controllers
             vehicle.TotalTime = (vehicle.EndTime - vehicle.StartTime);
             //db.Vehicles.Remove(vehicle);
             db.SaveChanges();
-            //return View("Receipt", vehicle);  
-            return RedirectToAction("Receipt", new { id = id });
+            return View("Receipt", vehicle);  
+            //return RedirectToAction("Receipt", new { id = id });
         }
+
+        //// GET: Vehicles1/Receipt/5
+        //public ActionResult Receipt(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Vehicle vehicle = db.Vehicles.Find(id);
+
+        //    return View(vehicle);
+        //}
 
         protected override void Dispose(bool disposing)
         {
