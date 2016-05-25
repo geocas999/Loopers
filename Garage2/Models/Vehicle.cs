@@ -50,8 +50,8 @@ namespace Garage2.Models
         [Display(Name = "Parkerad")]
         public bool Parked { get; set; }
 
-        public virtual ICollection<Member> Members { get; set; }
-        public virtual ICollection<VehicleType> VehicleTypes { get; set; }
+        public virtual Member Members { get; set; }
+        public virtual VehicleType VehicleTypes { get; set; }
     }
 
 
