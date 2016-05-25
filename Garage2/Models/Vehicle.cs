@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Garage2.Models
 {
@@ -17,7 +18,10 @@ namespace Garage2.Models
         [Display(Name = "Registreringsnummer")]
         public string RegNr { get; set; }
 
+        [Display(Name = "Medlemsnummer")]
         public int MemberId { get; set; }
+
+        [Display(Name = "Fordonstyp")]
         public int VehicleTypeId { get; set; }
 
         //[Required]
@@ -27,7 +31,6 @@ namespace Garage2.Models
         [Required]
         [Display(Name = "Parkering påbörjad")]
         public DateTime StartTime { get; set; }
-
 
         [Display(Name = "Parkering avslutad")]
         public DateTime? EndTime { get; set; }
@@ -50,6 +53,8 @@ namespace Garage2.Models
         public virtual ICollection<Member> Members { get; set; }
         public virtual ICollection<VehicleType> VehicleTypes { get; set; }
     }
+
+
 
     //public enum VehicleType
     //{
