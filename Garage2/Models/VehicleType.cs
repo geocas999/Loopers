@@ -12,6 +12,5 @@ namespace Garage2.Models
         public string Type { get; set; }
 
         public virtual ICollection<Vehicle> Vehicles { get; set; }
-
     }
 }

@@ -1,47 +1,82 @@
-﻿@model IEnumerable<Garage2.Models.Member>
+﻿@*@model IEnumerable<Garage2.Models.Member>*@
+@model IPagedList<Member>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Medlemmar</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MemberNr)
-        </th>
-         <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-       
-        
+<br/>
+<div class="col-md-6">
+    <h5>
+        @Html.ActionLink("Registrera medlem", "Create")
+    </h5>
+</div>
 
-        
-        <th></th>
-    </tr>
+<div class="col-md-6">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberNr)
-        </td>
+    <form method="get"
+          action="@Url.Action("Index")"
+          data-tomas-ajax="true"
+          data-tomas-target="#searchList">
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
+        <input id="inputRegister1"
+               class="form-control"
+               type="search"
+               name="searchTerm"
+               placeholder="Sök medlem"
+               data-tomas-autocomplete="@Url.Action("Autocomplete")" />
+    </form>
+</div>
+<br /><br /><br />
+<div id="searchList">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Medlemsnummer", "Index", new { sorting = ViewBag.SortByMemberNr })
+            </th>
+            <th>
+                @Html.ActionLink("Medlemsnamn", "Index", new { sorting = ViewBag.SortByName })
+            </th>
+            <th></th>
+        </tr>
 
-        
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    </table>
+    <br />
+    <div class="col-md-12">
+        @{
+            if (Request.QueryString["searchTerm"] != null)
+            {
+                @Html.ActionLink("Tillbaka till listan ", "Index")
+            }
+            else
+            {
+                <div data-tomas-target="#searchList">
+                    Sidan @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) av @Model.PageCount
 
-</table>
+                    @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber, sorting = ViewBag.CurrentSort }))
+                    @*PagedListRenderOptions.PageNumbersOnly)*@
+                </div>
+            }
+
+        }
+    </div>
+</div>

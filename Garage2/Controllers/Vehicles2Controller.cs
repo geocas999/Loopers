@@ -11,38 +11,17 @@ using Garage2.Models;
 
 namespace Garage2.Controllers
 {
-    public class Vehicles1Controller : Controller
+    public class Vehicles2Controller : Controller
     {
         private GarageContext db = new GarageContext();
 
-        // GET: Vehicles1
+        // GET: Vehicles2
         public ActionResult Index()
         {
-            var vehicles = db.Vehicles.Include(v => v.Member).Include(v => v.VehicleType);
-            return View(vehicles.ToList());
+            return View(db.Vehicles.ToList());
         }
 
-        public ActionResult CheckOutBySearching(string searchTerm)
-        {
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                if (db.Vehicles.Any(v => v.RegNr == searchTerm))
-                {
-                    var vehicle = from v in db.Vehicles where v.RegNr == searchTerm select v;
-                    return RedirectToAction("Delete", new { vehicle.First().Id });
-                }
-            }
-            return View();
-        }
-
-        public ActionResult Autocomplete(string term)
-        {
-            var model = db.Vehicles.Where(v => v.RegNr.StartsWith(term)).Take(10).Select(v => new { label = v.RegNr });
-
-            return Json(model, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: Vehicles1/Details/5
+        // GET: Vehicles2/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -57,15 +36,13 @@ namespace Garage2.Controllers
             return View(vehicle);
         }
 
-        // GET: Vehicles1/Create
+        // GET: Vehicles2/Create
         public ActionResult Create()
         {
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name");
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Type");
             return View();
         }
 
-        // POST: Vehicles1/Create
+        // POST: Vehicles2/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -79,12 +56,10 @@ namespace Garage2.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Type", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 
-        // GET: Vehicles1/Edit/5
+        // GET: Vehicles2/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,12 +71,10 @@ namespace Garage2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Type", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 
-        // POST: Vehicles1/Edit/5
+        // POST: Vehicles2/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -114,12 +87,10 @@ namespace Garage2.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MemberId = new SelectList(db.Members, "Id", "Name", vehicle.MemberId);
-            ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Type", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 
-        // GET: Vehicles1/Delete/5
+        // GET: Vehicles2/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -134,7 +105,7 @@ namespace Garage2.Controllers
             return View(vehicle);
         }
 
-        // POST: Vehicles1/Delete/5
+        // POST: Vehicles2/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

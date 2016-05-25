@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Garage2.DataAccessLayer;
 using Garage2.Models;
+using PagedList;
 
 namespace Garage2.Controllers
 {
@@ -16,9 +17,63 @@ namespace Garage2.Controllers
         private GarageContext db = new GarageContext();
 
         // GET: Members
-        public ActionResult Index()
+        public ActionResult Index(string sorting, string searchTerm, int? pageNumber)
         {
-            return View(db.Members.ToList());
+            ViewBag.CurrentSort = sorting;
+
+            //if the sorting parameter is null or empty then we are initializing the value as descending name  
+            ViewBag.SortByName = string.IsNullOrEmpty(sorting) ? "Medlemsnamn_desc" : "";
+
+            //if the sorting value is 'Fordonstyp' then we are initializing the value as descending 'Fordonstyp 
+            ViewBag.SortByMemberNr = sorting == "Medlemsnummer" ? "Medlemsnummer_desc" : "Medlemsnummer";
+
+            //here we are converting the db.Vehicles to AsQueryable so that we can invoke all the extension methods on variable records.  
+            var members = db.Members.AsQueryable();
+
+            members = from v in db.Members orderby v.MemberNr select v;
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                if (db.Members.Any(v => v.Name == searchTerm))
+                {
+                    var member = from v in db.Members where v.Name == searchTerm select v;
+                    return RedirectToAction("Details", new { member.First().Id });
+                }
+            }
+
+            switch (sorting)
+            {
+                case "Medlemsnummer":
+                    //vehicles = vehicles.OrderBy(v => v.VehicleType);
+                    members = from v in db.Members orderby v.MemberNr select v;
+                    break;
+                case "Medlemsnummer_desc":
+                    //vehicles = from v in db.Vehicles orderby v.VehicleType descending select v;
+                    members = members.OrderByDescending(v => v.MemberNr);
+                    break;
+
+                case "Medlemsnamn":
+                    //vehicles = vehicles.OrderBy(v => v.RegNr);
+                    members = from v in db.Members orderby v.Name select v;
+                    break;
+                case "Medlemsnamn_desc":
+                    //vehicles = from v in db.Vehicles orderby v.RegNr descending select v; 
+                    members = members.OrderByDescending(v => v.Name);
+                    break;
+
+                default:
+                    break;
+            }
+            return View(members.ToPagedList(pageNumber ?? 1, 8));
+        }
+
+
+
+        public ActionResult Autocomplete(string term)
+        {
+            var model = db.Members.Where(v => v.Name.StartsWith(term)).Take(10).Select(v => new { label = v.Name });
+
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Members/Details/5
@@ -39,6 +94,7 @@ namespace Garage2.Controllers
         // GET: Members/Create
         public ActionResult Create()
         {
+            var maxNr = (db.Members.Max(x => x.MemberNr) ) + 1;
             return View();
         }
 

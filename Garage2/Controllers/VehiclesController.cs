@@ -1,14 +1,12 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Data;
-//using System.Data.Entity;
-//using System.Linq;
-//using System.Net;
-//using System.Web;
-//using System.Web.Mvc;
-//using Garage2.DataAccessLayer;
-//using Garage2.Models;
-//using PagedList;
+﻿using System;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
+using Garage2.DataAccessLayer;
+using Garage2.Models;
+using PagedList;
 
 
 //namespace Garage2.Controllers
@@ -17,108 +15,112 @@
 //    {
 //        private GarageContext db = new GarageContext();
 
-        
+        // GET: Vehicles
+        public ActionResult Index(string sorting ,  string searchTerm , int? pageNumber)
+        {
+            ViewBag.CurrentSort = sorting;
 
-//        // GET: Vehicles
-//        public ActionResult Index(string Sorting = null, string searchTerm = null, int page = 1)
-//        {
-//            var vehicles = (from v in db.Vehicles orderby v.RegNr where v.Parked == true select v).ToPagedList(page, 10);
+            //if the sorting parameter is null or empty then we are initializing the value as descending name  
+            ViewBag.SortByRegNr = string.IsNullOrEmpty(sorting) ? "RegNummer_desc" : "";
 
-//            if (!string.IsNullOrEmpty(searchTerm))
-//            {
-//                vehicles = (from v in db.Vehicles orderby v.RegNr where v.RegNr.StartsWith(searchTerm) select v).ToPagedList(page, 1);
-//                return View(vehicles);
-//            }
+            //if the sorting value is 'Fordonstyp' then we are initializing the value as descending 'Fordonstyp 
+            ViewBag.SortByVehicleType = sorting == "Fordonstyp" ? "Fordonstyp_desc" : "Fordonstyp";
 
-//            //if (show == "all")
-//            //{
-//            //    vehicles = (from v in db.Vehicles orderby v.RegNr select v).ToPagedList(page, 10);
-//            //    return View(vehicles);
-//            //}
+            //if the sorting value is 'Parkering påbörjad' then we are initializing the value as descending 'Parkering påbörjad' 
+            ViewBag.SortByStartTime = sorting == "Parkering påbörjad" ? "Parkering påbörjad_desc" : "Parkering påbörjad";
 
-//            switch (Sorting)
-//            {
-//                case "VehicleType":
-//                    //vehicles = (vehicles.OrderBy(v => v.VehicleType.ToString())).ToPagedList(page, 6);
-//                    vehicles = (from v in db.Vehicles orderby v.VehicleType select v).ToPagedList(page, 10);
-//                    break;
-//                case "RegNr":
-//                    //vehicles = vehicles.OrderBy(v => v.RegNr).ToPagedList(page, 6);
-//                    vehicles = (from v in db.Vehicles orderby v.RegNr select v).ToPagedList(page, 10);
-//                    break;
-//                case "StartTime":
-//                    //vehicles = vehicles.OrderBy(v => v.StartTime).ToPagedList(page, 6);
-//                    vehicles = (from v in db.Vehicles orderby v.StartTime select v).ToPagedList(page, 10);
-//                    break;
-//                default:
-//                    //vehicles = vehicles.OrderBy(v => v.RegNr).ToPagedList(page, 6);
-//                    //vehicles = (from v in db.Vehicles orderby v.RegNr select v).ToPagedList(page, 10);
-//                    break;                    
-//            }
-//            return View(vehicles);
-//        }
+            //here we are converting the db.Vehicles to AsQueryable so that we can invoke all the extension methods on variable records.  
+            var vehicles = db.Vehicles.AsQueryable();
 
-//        public ActionResult Autocomplete(string term)
-//        {
-//            var model = db.Vehicles.Where(v => v.RegNr.StartsWith(term)).Take(10).Select(v => new { label = v.RegNr });
+            vehicles = from v in db.Vehicles orderby v.RegNr where v.Parked == true select v;
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                if (db.Vehicles.Any(v => v.RegNr==searchTerm))
+                {
+                    var vehicle = from v in db.Vehicles where v.RegNr == searchTerm select v;
+                    return RedirectToAction("Details", new { vehicle.First().Id });
+                }
+            }
+
+            //if (show == "all")
+            //{
+            //    vehicles = from v in db.Vehicles orderby v.RegNr select v;
+            //}
+
+            switch (sorting)
+            {
+                case "Fordonstyp":
+                    //vehicles = vehicles.OrderBy(v => v.VehicleType);
+                    vehicles = from v in db.Vehicles orderby v.VehicleType select v;
+                    break;
+                case "Fordonstyp_desc":
+                    //vehicles = from v in db.Vehicles orderby v.VehicleType descending select v;
+                    vehicles = vehicles.OrderByDescending(v => v.VehicleType);
+                    break;
+
+                case "RegNummer":
+                    //vehicles = vehicles.OrderBy(v => v.RegNr);
+                    vehicles = from v in db.Vehicles orderby v.RegNr select v;
+                    break;
+                case "RegNummer_desc":
+                    //vehicles = from v in db.Vehicles orderby v.RegNr descending select v; 
+                    vehicles = vehicles.OrderByDescending(v => v.RegNr);
+                    break;
+
+                case "Parkering påbörjad":
+                    //vehicles = vehicles.OrderBy(v => v.StartTime);
+                    vehicles = from v in db.Vehicles orderby v.StartTime select v;
+                    break;
+                case "Parkering påbörjad_desc":
+                    //vehicles = from v in db.Vehicles orderby v.StartTime descending select v;
+                    vehicles = vehicles.OrderByDescending(v => v.StartTime);
+                    break;
+
+                default:
+                    break;                    
+            }
+            return View(vehicles.ToPagedList(pageNumber ?? 1, 10));
+        }
+
+
+
+        public ActionResult Autocomplete(string term)
+        {
+            var model = db.Vehicles.Where(v => v.RegNr.StartsWith(term)).Take(10).Select(v => new { label = v.RegNr });
 
 //            return Json(model, JsonRequestBehavior.AllowGet);
 //        }
 
 
-//        public ActionResult Search(string searchTerm = null)
-//        {
-//            var model = from v in db.Vehicles select v;
-
-//            if (string.IsNullOrEmpty(searchTerm))
-//            {
-//                return View(model);
-//            }
-
-//            model = from v in db.Vehicles where v.RegNr.StartsWith(searchTerm) select v;
-//            if (Request.IsAjaxRequest())
-//            {
-
-//                return PartialView("_SearchVehicle", model);
-
-//            }
-//            return View(model);
-//        }
-
-
-
-//        //SortOrder by Category
-//        public ActionResult Sort(string Sorting_Order)
-//        {
+       
+        public ActionResult CheckIfParked(string RegNr)
+        {
+            if(db.Vehicles.Any(v => v.RegNr == RegNr))
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
             
-//            var vehicles = from v in db.Vehicles select v;
+        }
 
-//            switch (Sorting_Order)
-//            {
-//                case "VehicleType":
-//                    vehicles = vehicles.OrderBy(v => v.VehicleType.ToString());
-//                    break;
-//                case "RegNr":
-//                    vehicles = vehicles.OrderBy(v => v.RegNr);
-//                    break;
-//                case "StartTime":
-//                    vehicles = vehicles.OrderBy(v => v.StartTime);
-//                    break;
-//                case "Brand":
-//                    vehicles = vehicles.OrderBy(v => v.Brand);
-//                    break;
-//                case "Model":
-//                    vehicles = vehicles.OrderBy(v => v.Model);
-//                    break;
-//                case "Color":
-//                    vehicles = vehicles.OrderBy(v => v.Color);
-//                    break;
-//                default:
-//                    vehicles = vehicles.OrderBy(v => v.RegNr);
-//                    break;
-//            }
-//            return View(vehicles);
-//        }
+
+
+        public ActionResult CheckOutBySearching(string searchTerm)
+        {
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                if (db.Vehicles.Any(v => v.RegNr == searchTerm))
+                {
+                    var vehicle = from v in db.Vehicles where v.RegNr == searchTerm select v;
+                    return RedirectToAction("CheckOut", new { vehicle.First().Id });
+                }
+            }
+            return View();
+        }
 
 
 //        // GET: Vehicles/Details/5
@@ -136,95 +138,98 @@
 //            return View(vehicle);
 //        }
 
-//        // GET: Vehicles/Create
-//        public ActionResult Create()
-//        {
-//            return View();
-//        }
 
-//        // POST: Vehicles/Create
-//        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-//        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public ActionResult Create([Bind(Include = "Id,RegNr,VehicleType,StartTime,EndTime,Brand,Model,Color,TotalTime,Parked")] VehicleType vehicle)
-//        {
+        // GET: Vehicles/Check-In
+        public ActionResult CheckIn()
+        {
+            return View();
+        }
 
-//            if (ModelState.IsValid)
-//            {
-//                //if(ValidateRegNr(RegNr) = true)
+        // POST: Vehicles/ParkVehicle
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckIn( [Bind(Include = "Id,RegNr,MemberId,VehicleTypeId,StartTime,EndTime,Brand,Model,Color,TotalTime,Parked")] Vehicle vehicle)
+        {
+            if (db.Vehicles.Any(v => v.RegNr == vehicle.RegNr))
+            {
+                ModelState.AddModelError("RegNr", "Registreringsnumret finns redan parkerad!");
+            }
 
-//                vehicle.StartTime = DateTime.Now;
-//                vehicle.Parked = true;
-//                db.Vehicles.Add(vehicle);
-//                db.SaveChanges();
-//                return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {              
+                vehicle.StartTime = DateTime.Now;
+                vehicle.Parked = true;
+                db.Vehicles.Add(vehicle);
+                db.SaveChanges();
+                return RedirectToAction("Index");                         
+            }
 
-//            }
+            return View(vehicle);
+        }
+          
+             
+        // GET: Vehicles/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Vehicle vehicle = db.Vehicles.Find(id);
+            if (vehicle == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vehicle);
+        }
 
-//            return View(vehicle);
-//        }
-               
-//        // GET: Vehicles/Edit/5
-//        public ActionResult Edit(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//            }
-//            VehicleType vehicle = db.Vehicles.Find(id);
-//            if (vehicle == null)
-//            {
-//                return HttpNotFound();
-//            }
-//            return View(vehicle);
-//        }
+        // POST: Vehicles/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id, RegNr, MemberId, VehicleTypeId, StartTime, EndTime, Brand, Model, Color, TotalTime, Parked")] Vehicle vehicle)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(vehicle).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(vehicle);
+        }
 
-//        // POST: Vehicles/Edit/5
-//        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-//        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public ActionResult Edit([Bind(Include = "Id, RegNr, VehicleType, StartTime, EndTime, Brand, Model, Color, TotalTime, Parked")] VehicleType vehicle)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                db.Entry(vehicle).State = EntityState.Modified;
-//                db.SaveChanges();
-//                return RedirectToAction("Index");
-//            }
-//            return View(vehicle);
-//        }
+        // GET: Vehicles/Check-Out/5
+        public ActionResult CheckOut(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Vehicle vehicle = db.Vehicles.Find(id);
+            if (vehicle == null)
+            {
+                return HttpNotFound();
+            }
+            return View(vehicle);
+        }
 
-//        // GET: Vehicles/Delete/5
-//        public ActionResult Delete(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//            }
-//            VehicleType vehicle = db.Vehicles.Find(id);
-//            if (vehicle == null)
-//            {
-//                return HttpNotFound();
-//            }
-//            return View(vehicle);
-//        }
-
-//        // POST: Vehicles/Delete/5
-//        [HttpPost, ActionName("Delete")]
-//        [ValidateAntiForgeryToken]
-//        public ActionResult DeleteConfirmed(int id)
-//        {
-//            VehicleType vehicle = db.Vehicles.Find(id);
-//            vehicle.EndTime = DateTime.Now;
-//            vehicle.Parked = false;
-//            vehicle.TotalTime = (vehicle.EndTime - vehicle.StartTime);
-//            //db.Vehicles.Remove(vehicle);
-//            db.SaveChanges();
-//            //return View("Receipt", vehicle);  
-//            return RedirectToAction("Receipt", new { id = id });
-//        }
+        // POST: Vehicles/Delete/5
+        [HttpPost, ActionName("CheckOut")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckOutConfirmed(int id)
+        {
+            Vehicle vehicle = db.Vehicles.Find(id);
+            vehicle.EndTime = DateTime.Now;
+            vehicle.Parked = false;
+            vehicle.TotalTime = (vehicle.EndTime - vehicle.StartTime);
+            //db.Vehicles.Remove(vehicle);
+            db.SaveChanges();
+            //return View("Receipt", vehicle);  
+            return RedirectToAction("Receipt", new { id = id });
+        }
 
 //        // GET: Vehicles/Details/5
 //        public ActionResult Receipt(int? id)
