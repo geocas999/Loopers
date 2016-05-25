@@ -18,6 +18,8 @@ namespace Garage2.Models
         public string RegNr { get; set; }
 
         public int MemberId { get; set; }
+
+        [Display(Name = "Fordonstyp")]
         public int VehicleTypeId { get; set; }
 
         //[Required]

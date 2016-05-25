@@ -18,19 +18,45 @@ namespace Garage2.Migrations
         {
             Member[] members = SeedMembers(context);
             VehicleType[] vehicleTypes = SeedVehicleTypes(context);
-            
+
             //for (int i = 0; i < 7; i++)
             //{
-                context.Vehicles.AddOrUpdate(
-                      v => v.RegNr,
-                      new Vehicle { RegNr = "ATA131", MemberId = 1, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Alfa Romeo", Model = "X1", Color = "Grå", TotalTime = null, Parked = true },
-                      new Vehicle { RegNr = "BPQ242", MemberId = 2, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Alfa Romeo", Model = "X1", Color = "Grå", TotalTime = null, Parked = true },
-                      new Vehicle { RegNr = "BPA403", MemberId = 3, VehicleTypeId = 3, StartTime = DateTime.Now, EndTime = null, Brand = "Scania", Model = "SX07", Color = "Blå", TotalTime = null, Parked = true },
-                      new Vehicle { RegNr = "XVE324", MemberId = 4, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Toyota", Model = "TY12", Color = "svart", TotalTime = null, Parked = true },
-                      new Vehicle { RegNr = "GSI925", MemberId = 5, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Audi", Model = "X2", Color = "Grå", TotalTime = null, Parked = true },
-                      new Vehicle { RegNr = "KGK686", MemberId = 6, VehicleTypeId = 2, StartTime = DateTime.Now, EndTime = null, Brand = "Volkswagen", Model = "SX08", Color = "Red", TotalTime = null, Parked = true },
-                      new Vehicle { RegNr = "OPE017", MemberId = 7, VehicleTypeId = 2, StartTime = DateTime.Now, EndTime = null, Brand = "BMV", Model = "TX99", Color = "Grön", TotalTime = null, Parked = true }
-                    );
+
+            //New Vehicles Seed Garage 2.5
+            context.Vehicles.AddOrUpdate(
+                v => v.RegNr,
+                new Vehicle { RegNr = "RXA135", MemberId = 1, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Volvo", Model = "V70", Color = "Grå", TotalTime = null, Parked = true },
+                new Vehicle { RegNr = "DPQ341", MemberId = 2, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Volvo", Model = "V40", Color = "Grå", TotalTime = null, Parked = true },
+                new Vehicle { RegNr = "EXA408", MemberId = 3, VehicleTypeId = 3, StartTime = DateTime.Now, EndTime = null, Brand = "Scania", Model = "SX07", Color = "Blå", TotalTime = null, Parked = true },
+                new Vehicle { RegNr = "HUE327", MemberId = 4, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Toyota", Model = "Celica", Color = "Vit", TotalTime = null, Parked = true },
+                new Vehicle { RegNr = "MSI121", MemberId = 5, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Mercedes", Model = "Benz", Color = "Grå", TotalTime = null, Parked = true },
+                new Vehicle { RegNr = "GKI681", MemberId = 6, VehicleTypeId = 2, StartTime = DateTime.Now, EndTime = null, Brand = "Volkswagen", Model = "Golf", Color = "Röd", TotalTime = null, Parked = true },
+                new Vehicle { RegNr = "PEO013", MemberId = 7, VehicleTypeId = 2, StartTime = DateTime.Now, EndTime = null, Brand = "Ford", Model = "Mondeo", Color = "Grön", TotalTime = null, Parked = true }
+              );
+
+            //New Vehicles Seed Garage 2.5
+            //context.Vehicles.AddOrUpdate(
+            //      v => v.RegNr,
+            //      new Vehicle { RegNr = "QTA135", MemberId = 1, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Volvo", Model = "V70", Color = "Grå", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "APQ249", MemberId = 2, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Volvo", Model = "V40", Color = "Grå", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "APA408", MemberId = 3, VehicleTypeId = 3, StartTime = DateTime.Now, EndTime = null, Brand = "Scania", Model = "SX07", Color = "Blå", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "VVE329", MemberId = 4, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Toyota", Model = "Celica", Color = "Vit", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "FSI929", MemberId = 5, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Mercedes", Model = "Benz", Color = "Grå", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "JGK683", MemberId = 6, VehicleTypeId = 2, StartTime = DateTime.Now, EndTime = null, Brand = "Volkswagen", Model = "Golf", Color = "Röd", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "NPE013", MemberId = 7, VehicleTypeId = 2, StartTime = DateTime.Now, EndTime = null, Brand = "Ford", Model = "Mondeo", Color = "Grön", TotalTime = null, Parked = true }
+            //    );
+
+            //New Vehicles Seed Garage 2.5
+            //context.Vehicles.AddOrUpdate(
+            //      v => v.RegNr,
+            //      new Vehicle { RegNr = "ATA131", MemberId = 1, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Alfa Romeo", Model = "X1", Color = "Grå", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "BPQ242", MemberId = 2, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Alfa Romeo", Model = "X1", Color = "Grå", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "BPA403", MemberId = 3, VehicleTypeId = 3, StartTime = DateTime.Now, EndTime = null, Brand = "Scania", Model = "SX07", Color = "Blå", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "XVE324", MemberId = 4, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Toyota", Model = "TY12", Color = "svart", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "GSI925", MemberId = 5, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Audi", Model = "X2", Color = "Grå", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "KGK686", MemberId = 6, VehicleTypeId = 2, StartTime = DateTime.Now, EndTime = null, Brand = "Volkswagen", Model = "SX08", Color = "Red", TotalTime = null, Parked = true },
+            //      new Vehicle { RegNr = "OPE017", MemberId = 7, VehicleTypeId = 2, StartTime = DateTime.Now, EndTime = null, Brand = "BMV", Model = "TX99", Color = "Grön", TotalTime = null, Parked = true }
+            //    );
             //}
 
         }
