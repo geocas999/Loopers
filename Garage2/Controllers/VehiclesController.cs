@@ -9,11 +9,11 @@ using Garage2.Models;
 using PagedList;
 
 
-namespace Garage2.Controllers
-{
-    public class VehiclesController : Controller
-    {
-        private GarageContext db = new GarageContext();
+//namespace Garage2.Controllers
+//{
+//    public class VehiclesController : Controller
+//    {
+//        private GarageContext db = new GarageContext();
 
         // GET: Vehicles
         public ActionResult Index(string sorting ,  string searchTerm , int? pageNumber)
@@ -89,8 +89,8 @@ namespace Garage2.Controllers
         {
             var model = db.Vehicles.Where(v => v.RegNr.StartsWith(term)).Take(10).Select(v => new { label = v.RegNr });
 
-            return Json(model, JsonRequestBehavior.AllowGet);
-        }
+//            return Json(model, JsonRequestBehavior.AllowGet);
+//        }
 
 
        
@@ -123,20 +123,20 @@ namespace Garage2.Controllers
         }
 
 
-        // GET: Vehicles/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Vehicle vehicle = db.Vehicles.Find(id);
-            if (vehicle == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vehicle);
-        }
+//        // GET: Vehicles/Details/5
+//        public ActionResult Details(int? id)
+//        {
+//            if (id == null)
+//            {
+//                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+//            }
+//            VehicleType vehicle = db.Vehicles.Find(id);
+//            if (vehicle == null)
+//            {
+//                return HttpNotFound();
+//            }
+//            return View(vehicle);
+//        }
 
 
         // GET: Vehicles/Check-In
@@ -231,29 +231,29 @@ namespace Garage2.Controllers
             return RedirectToAction("Receipt", new { id = id });
         }
 
-        // GET: Vehicles/Details/5
-        public ActionResult Receipt(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Vehicle vehicle = db.Vehicles.Find(id);
-            if (vehicle == null)
-            {
-                return HttpNotFound();
-            }            
+//        // GET: Vehicles/Details/5
+//        public ActionResult Receipt(int? id)
+//        {
+//            if (id == null)
+//            {
+//                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+//            }
+//            VehicleType vehicle = db.Vehicles.Find(id);
+//            if (vehicle == null)
+//            {
+//                return HttpNotFound();
+//            }            
 
-            return View(vehicle);
-        }
+//            return View(vehicle);
+//        }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-    }
-}
+//        protected override void Dispose(bool disposing)
+//        {
+//            if (disposing)
+//            {
+//                db.Dispose();
+//            }
+//            base.Dispose(disposing);
+//        }
+//    }
+//}

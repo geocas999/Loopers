@@ -20,5 +20,6 @@ namespace Garage2.DataAccessLayer
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
     }
+
    
 }

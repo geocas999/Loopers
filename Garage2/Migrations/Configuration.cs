@@ -14,7 +14,7 @@ namespace Garage2.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(Garage2.DataAccessLayer.GarageContext context)
+        protected override void Seed(GarageContext context)
         {
             var members = new List<Member>
             {
@@ -74,3 +74,4 @@ namespace Garage2.Migrations
         }
     }
 }
+

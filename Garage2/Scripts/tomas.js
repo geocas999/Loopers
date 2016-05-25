@@ -40,22 +40,22 @@ $(function () {
         $input.autocomplete(options);
     };
 
-    var getPage = function () {
-        var $a = $(this);
+    //var getPage = function () {
+    //    var $a = $(this);
 
-        var options = {
-            url: $a.attr("href"),
-            data: $("form").serialize(),
-            type: "get"
-        };
+    //    var options = {
+    //        url: $a.attr("href"),
+    //        data: $("form").serialize(),
+    //        type: "get"
+    //    };
 
-        $.ajax(options).done(function (data) {
-            var target = $a.parents("div.pagedList").attr("data-tomas-target");
-            $(target).replaceWith(data);
-        });
-        return false;
+    //    $.ajax(options).done(function (data) {
+    //        var target = $a.parents("div.pagedList").attr("data-tomas-target");
+    //        $(target).replaceWith(data);
+    //    });
+    //    return false;
 
-    };
+    //};
 
     $("form[data-tomas-ajax='true']").submit(ajaxFormSubmit);
     $("input[data-tomas-autocomplete]").each(createAutocomplete);
