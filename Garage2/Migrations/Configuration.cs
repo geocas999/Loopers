@@ -6,6 +6,7 @@ namespace Garage2.Migrations
     using System.Linq;
     using Garage2.Models;
     using System.Collections.Generic;
+    using DataAccessLayer;
     internal sealed class Configuration : DbMigrationsConfiguration<Garage2.DataAccessLayer.GarageContext>
     {
         public Configuration()

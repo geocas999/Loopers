@@ -72,8 +72,15 @@ namespace Garage2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,RegNr,MemberId,VehicleTypeId,StartTime,EndTime,Brand,Model,Color,TotalTime,Parked")] Vehicle vehicle)
         {
+            if (db.Vehicles.Any(v => v.RegNr == vehicle.RegNr))
+            {
+                ModelState.AddModelError("RegNr", "Registreringsnumret finns redan parkerad!");
+            }
+
             if (ModelState.IsValid)
             {
+                vehicle.StartTime = DateTime.Now;
+                vehicle.Parked = true;
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
                 return RedirectToAction("Index");

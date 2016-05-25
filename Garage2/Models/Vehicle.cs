@@ -16,8 +16,10 @@ namespace Garage2.Models
         [Display(Name = "Registreringsnummer")]
         public string RegNr { get; set; }
 
+        [Display(Name = "Medlemsnummer")]
         public int MemberId { get; set; }
 
+        [Display(Name = "Fordonstyp")]
         public int VehicleTypeId { get; set; }
 
         [Required]
