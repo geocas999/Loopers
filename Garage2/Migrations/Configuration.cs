@@ -5,7 +5,7 @@ namespace Garage2.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using Garage2.Models;
-
+    using System.Collections.Generic;
     internal sealed class Configuration : DbMigrationsConfiguration<Garage2.DataAccessLayer.GarageContext>
     {
         public Configuration()
@@ -16,46 +16,59 @@ namespace Garage2.Migrations
 
         protected override void Seed(Garage2.DataAccessLayer.GarageContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var members = new List<Member>
+            {
+            new Member{MemberNr = 1001,Name="Andreas Carsbring"},
+            new Member{MemberNr = 1002,Name="Andreas Thyrhaug"},
+            new Member{MemberNr = 1003,Name="Anette Tillbom"},
+            new Member{MemberNr = 1004,Name="Ari Kylmänen"},
+            new Member{MemberNr = 1005,Name="Aryo Pehlewan"},
+            new Member{MemberNr = 1006,Name="Axel Räntilä"},
+            new Member{MemberNr = 1007,Name="Bo Edström"},
+            new Member{MemberNr = 1008,Name="Fernando Nilsson"},
+            new Member{MemberNr = 1009,Name="Fredrik Lindroth"},
+            new Member{MemberNr = 1010,Name="George Caspersson"},
+            new Member{MemberNr = 1011,Name="Helen Magnusson"},
+            new Member{MemberNr = 1012,Name="Johan Haak"},
+            new Member{MemberNr = 1013,Name="John Castell"},
+            new Member{MemberNr = 1014,Name="Karl Lindström"},
+            new Member{MemberNr = 1015,Name="Lennart Skagerling"},
+            new Member{MemberNr = 1016,Name="Marie Hansson"},
+            new Member{MemberNr = 1017,Name="Mattias Karlsson"},
+            new Member{MemberNr = 1018,Name="Michael Novak"},
+            new Member{MemberNr = 1019,Name="Thomas J Ekman"},
+            new Member{MemberNr = 1020,Name="Thomas Sundblom"},
+            new Member{MemberNr = 1021,Name="Tomas Santana"},
+            new Member{MemberNr = 1022,Name="Wasim Randhawa"},
+            new Member{MemberNr = 1023,Name="Yaser Mosavi"},
+            new Member{MemberNr = 1024,Name="Oscar Jakobsson"},
+            };
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            members.ForEach(m => context.Members.AddOrUpdate(m));
+            context.SaveChanges();
 
-            //context.Vehicles.AddOrUpdate(
-            //  v => v.RegNr,
-            //  new Vehicle { VehicleType = VehicleType.Car, Brand = "Volvo", Model = "V70", Color = "Silver", RegNr = "ABC123", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.Car, Brand = "Volvo", Model = "V50", Color = "White", RegNr = "BCE323", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.Car, Brand = "Volvo", Model = "S80", Color = "Red", RegNr = "BCD456", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.Car, Brand = "Saab", Model = "95 Kombi", Color = "Black", RegNr = "CEC198", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.Car, Brand = "Saab", Model = "95 Sedan", Color = "Green", RegNr = "DEW376", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.Car, Brand = "Toyota", Model = "Celica", Color = "White", RegNr = "EEW171", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.Car, Brand = "Nissan", Model = "Micra", Color = "Green", RegNr = "FAB173", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.MC, Brand = "Honda", Model = "Sport", Color = "Black", RegNr = "FTY493", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.MC, Brand = "Yamaha", Model = "Fighter", Color = "Blue", RegNr = "GHX843", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.MC, Brand = "Kawasaki", Model = "Hyper", Color = "Black", RegNr = "JYT459", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.Bus, Brand = "Volvo", Model = "7900", Color = "Blue", RegNr = "HQW473", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.Bus, Brand = "Volvo", Model = "8900", Color = "Red", RegNr = "KTR472", StartTime = DateTime.Now },
-            //  new Vehicle { VehicleType = VehicleType.Bus, Brand = "Volvo", Model = "Sport", Color = "Blue", RegNr = "LEW321", StartTime = DateTime.Now }
-            //  );
+            var vehicleTypes = new List<VehicleType>
+            {
+            new VehicleType{Type = "Bil"},
+            new VehicleType{Type = "Buss"},
+            new VehicleType{Type = "Motorcykel"},
+            };
+            vehicleTypes.ForEach(v => context.VehicleTypes.AddOrUpdate(v));
+            context.SaveChanges();
 
+            var c = 1;
             for (int i = 0; i < 4; i++)
             {
+                //c = c + 1;
                 context.Vehicles.AddOrUpdate(
                       v => v.RegNr,
-                      new Models.Vehicle { RegNr = "CTA13" + i, VehicleType = Models.VehicleType.Bil, StartTime = DateTime.Now, EndTime = null, Brand = "Alfa Romeo", Model = "X1", Color = "Grå", TotalTime = null, Parked = true },
-                      new Models.Vehicle { RegNr = "BPA40" + i, VehicleType = Models.VehicleType.Buss, StartTime = DateTime.Now, EndTime = null, Brand = "Scania", Model = "SX07", Color = "Blå", TotalTime = null, Parked = true },
-                      new Models.Vehicle { RegNr = "SVE32" + i, VehicleType = Models.VehicleType.Motorcykel, StartTime = DateTime.Now, EndTime = null, Brand = "Toyota", Model = "TY12", Color = "svart", TotalTime = null, Parked = true },
-                      new Models.Vehicle { RegNr = "NSI92" + i, VehicleType = Models.VehicleType.Bil, StartTime = DateTime.Now, EndTime = null, Brand = "Audi", Model = "X2", Color = "Grå", TotalTime = null, Parked = true },
-                      new Models.Vehicle { RegNr = "HGK68" + i, VehicleType = Models.VehicleType.Buss, StartTime = DateTime.Now, EndTime = null, Brand = "Volkswagen", Model = "SX08", Color = "Red", TotalTime = null, Parked = true },
-                      new Models.Vehicle { RegNr = "SPE01" + i, VehicleType = Models.VehicleType.Motorcykel, StartTime = DateTime.Now, EndTime = null, Brand = "BMV", Model = "TX99", Color = "Grön", TotalTime = null, Parked = true }
+                      
+                      new Models.Vehicle { RegNr = "ABC12" + i, MemberId = c++, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Alfa Romeo", Model = "X1", Color = "Grå", TotalTime = null, Parked = true },
+                      new Models.Vehicle { RegNr = "ASD12" + i, MemberId = c++, VehicleTypeId = 3, StartTime = DateTime.Now, EndTime = null, Brand = "Scania", Model = "Lathi Scala", Color = "Blå", TotalTime = null, Parked = true },
+                      new Models.Vehicle { RegNr = "QWE12" + i, MemberId = c++, VehicleTypeId = 2, StartTime = DateTime.Now, EndTime = null, Brand = "Toyota", Model = "TY12", Color = "svart", TotalTime = null, Parked = true },
+                      new Models.Vehicle { RegNr = "ZXC12" + i, MemberId = c++, VehicleTypeId = 1, StartTime = DateTime.Now, EndTime = null, Brand = "Audi", Model = "X7", Color = "Grå", TotalTime = null, Parked = true },
+                      new Models.Vehicle { RegNr = "CTA13" + i, MemberId = c++, VehicleTypeId = 2, StartTime = DateTime.Now, EndTime = null, Brand = "Alfa Romeo", Model = "X1", Color = "Grå", TotalTime = null, Parked = true },
+                      new Models.Vehicle { RegNr = "BPA40" + i, MemberId = c++, VehicleTypeId = 3, StartTime = DateTime.Now, EndTime = null, Brand = "Scania", Model = "Omnilink", Color = "Blå", TotalTime = null, Parked = true }
                     );
             }
         }

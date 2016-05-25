@@ -1,0 +1,37 @@
+﻿@model Garage2.Models.Member
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Medlemmar uppgiter</h2>
+
+<div>
+    <h4>Medlem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberNr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberNr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<br />
+<p>
+    @Html.ActionLink("Redigera", "Edit", new { id = Model.Id })
+</p>
+<p>
+    @Html.ActionLink("Tillbaka till medlemsregister", "Index")
+</p>

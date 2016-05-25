@@ -5,8 +5,8 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -21,13 +21,14 @@ input,
 select,
 textarea {
     max-width: 280px;
-     border-radius: 5px; 
+    border-radius: 5px; 
 }
 
 #inputRegister1{
-    margin-left: 50px;
-    float:right;
-    height: 20px;
+    margin-right: 5px;
+    float:left;
+    height: 30px;
+    width: 200px;
    
 }
 

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 
 namespace Garage2.Models
 {
@@ -11,15 +9,16 @@ namespace Garage2.Models
 
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(6, MinimumLength = 6)]
+        [Required( ErrorMessage = "Registreringsnummer är obligatoriskt!") ]
+        [StringLength(6, MinimumLength = 6, ErrorMessage = "Ange 3 versala bokstäver och 3 siffror")]
         [RegularExpression(@"^[A-Z]{3}[0-9]{3}", ErrorMessage = "Ange 3 versala bokstäver och 3 siffror")]
+        [Remote("CheckIfParked", "Index", ErrorMessage = "Registreringsnumret finns redan som parkerad i registret!")]
         [Display(Name = "Registreringsnummer")]
         public string RegNr { get; set; }
 
-        [Required]
-        [Display(Name = "Fordonstyp")]
-        public VehicleType VehicleType { get; set; }
+        public int MemberId { get; set; }
+
+        public int VehicleTypeId { get; set; }
 
         [Required]
         [Display(Name = "Parkering påbörjad")]
@@ -43,15 +42,16 @@ namespace Garage2.Models
 
         [Display(Name = "Parkerad")]
         public bool Parked { get; set; }
+
+        public virtual Member Member { get; set; }
+        public virtual VehicleType VehicleType { get; set; }
     }
 
-    public enum VehicleType
-    {
-        //[Display(Name = "Bil")]
-        Bil,
-        //[Display(Name = "Motorcykel")]
-        Motorcykel,
-        //[Display(Name = "Buss")]
-        Buss
-    }
+    //public enum VehicleType
+    //{
+    //    Bil,
+    //    Buss,
+    //    Motorcykel
+        
+    //}
 }

@@ -65,7 +65,10 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Kör ut fordon" class="btn btn-default" /> |
+            <input type="submit" value="Kör ut fordon" class="btn btn-default" />
+        </div>
+        <br/>
+        <div>
             @Html.ActionLink("Tillbaka till översikt", "Index")
         </div>
     }

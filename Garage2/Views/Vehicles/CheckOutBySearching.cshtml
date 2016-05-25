@@ -1,0 +1,30 @@
+﻿@model Garage2.Models.Vehicle
+
+@{
+    ViewBag.Title = "SearchRegNr";
+}
+<br/>
+<hr />
+<h4>Check out fordon via registreringsnummer</h4>
+<hr />
+<br /><br />
+<div class="col-md-12">
+
+    <form method="get"
+          action="@Url.Action("SearchRegNr")"
+          data-tomas-ajax="true"
+          data-tomas-target="#searchIdForCheckOut">
+
+        <input id="inputRegister1"
+               class="form-control"
+               type="search"
+               name="searchTerm"
+               placeholder="Ange registreringsnummer"
+               data-tomas-autocomplete="@Url.Action("Autocomplete")" />
+    </form>
+</div>
+<br /><br /><br /><br /><br /><br /><br /><br />
+<div id="searchIdForCheckOut">
+
+</div>
+
